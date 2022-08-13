@@ -24,7 +24,7 @@
     "react-navigation": "^4.4.4",
     "react-tsparticles": "^2.1.0",
     "three": "^0.141.0",
-    "vercel": "^25.1.0"
+    "vercel": "^19.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

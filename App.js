@@ -6,9 +6,20 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import HomePage from './homepage'
 import FolderContent from './foldercontent';
 import Frontpage from './frontpage';
+import { Canvas } from '@react-three/fiber';
+import styled from 'styled-components';
+import { Suspense } from 'react';
+import { Earth } from './earth';
+import { View } from 'react-native';
+
 export default function App() {
   return (
-    <AppContainer />
+    <div>
+    <Canvas><Suspense fallback={null}>
+      <Earth />
+      </Suspense></Canvas>
+      </div>
+
     );
 }
 const sn = createSwitchNavigator({

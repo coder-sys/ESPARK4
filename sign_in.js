@@ -18,6 +18,18 @@ export default function SignIn (props){
   const [checked_lastname,setChecked_lastname] = useState('')
   const [checked_firstname,setChecked_firstname] = useState('')
   const [checked_email,setChecked_email] = useState('')
+  const signinwithgoogle = async(firstname,lastname,__password__,__email__) =>{
+    let __api__ = await fetch(`http://localhost:8000/verify_sign_in_information/${firstname}/${lastname}`)
+          __api__ = await __api__.json()
+          if(__api__['data'] == 'good to go!'){
+            alert(__api__['data'])
+
+          let api = await fetch(`http://localhost:8000/sign_in/${firstname}/${lastname}/${__password__}/${__email__}`)
+          let api_json = await api.json()
+          props.navigation.navigate('Login')
+          }
+  }
+  
    useEffect(()=>{
 
     function start(){
@@ -30,7 +42,6 @@ export default function SignIn (props){
   })
   return (
     <View >
-      <Particle_Background/>
       <div style={{marginTop:marginTop,marginLeft:marginLeft,marginRight:marginRight,opacity:opacity,width:'40%'}} >
         <TextInput placeholder='first name' type='text'style={{padding:15,marginRight:5,borderWidth:2,backgroundColor:'white'}} onChangeText={(e)=>{setFname(e);console.log(e)}}/> 
         <TextInput placeholder='lastname' type='text' style={{padding:15,borderWidth:2,backgroundColor:'white'}} onChangeText={(e)=>{setLname(e)}}/>
@@ -39,7 +50,15 @@ export default function SignIn (props){
 
         <TextInput placeholder='email' type='email' style={{padding:15,marginLeft:100,borderWidth:2,backgroundColor:'white'}} onChangeText={(e)=>(setEmail(e))}/> <br></br>        <br></br>
         <br></br>
-        <TextInput placeholder='password' type='password' style={{padding:15,marginLeft:100,borderWidth:2,backgroundColor:'white'}} onChangeText={(e)=>(setPassword(e))}/><br></br>
+        <TextInput placeholder='password' type='password' style={{padding:15,marginLeft:100,borderWidth:2,backgroundColor:'white'}} onChangeText={(e)=>(setPassword(e))}/><br></br><br></br>
+        <div style={{marginLeft:'107px'}}>
+        <GoogleLogin 
+      clientId={'615921346526-8gs4b74dja97fje48tv2o459a6g7e9ns.apps.googleusercontent.com'}
+      onSuccess={(res)=>signinwithgoogle(res.profileObj['name'],res.profileObj['givenName'],res.profileObj['googleId'],res.profileObj['email'])}
+      onFailure={(res)=>alert('had trouble signing in,please try again')}
+      cookiePolicy={'single_host_origin'}
+      isSignedIn={false}
+/></div><br></br><br></br>
         <button type='sumbit' style={{backgroundColor:"#3275A6",marginLeft:130,height:50,width:100,border:'none',borderRadius:10}} onClick={async()=>{
           let __api__ = await fetch(`http://localhost:8000/verify_sign_in_information/${fname}/${lname}`)
           __api__ = await __api__.json()
@@ -51,13 +70,7 @@ export default function SignIn (props){
           }
         }}><Text>Sign in</Text></button>
         </div>
-      <GoogleLogin 
-      clientId={'672590221729-shi326ntu91q9ghsf0pd7rt8hh56vb3n.apps.googleusercontent.com'}
-      onSuccess={(res)=>console.log(res.profileObj)}
-      onFailure={(res)=>console.log(res)}
-      cookiePolicy={'single_host_origin'}
-      isSignedIn={true}
-/>
+      
     </View>
   );
   

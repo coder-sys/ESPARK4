@@ -26,10 +26,9 @@ console.log(true,name)
 },[update])
   return (
     <SafeAreaProvider style={{backgroundColor:'white'}}>
-      <Particle_Background />
         <div style={{marginLeft:600,display:'inline-block'}}>
             <div style={{"display":"inline-block","margin":"20px"}}>
-            <TextInput type='text' placeholder='folder name' style={{borderWidth:4,color:'white'}} onChangeText={(data)=>{setFolderField(data);console.log(folderfield)
+            <TextInput type='text' placeholder='folder name' style={{borderWidth:4,color:'black'}} onChangeText={(data)=>{setFolderField(data);console.log(folderfield)
             }}/>
             <button style={{backgroundColor:"#3275A6",height:30,width:100,border:'none',borderRadius:10}} onClick={async()=>{
               setUpdated(update+1)

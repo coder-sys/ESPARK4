@@ -1,13 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import Particle_Background from './starbg';
+import { Canvas } from '@react-three/fiber';
+import styled from 'styled-components';
+import { Suspense } from 'react';
+import { Earth } from './earth';
+import { View } from 'react-native';
+const Container = styled.div`
+width:100%;
+height:100%
+`;
 export default function Frontpage(props) {
+  console.log(Container)
   return (
     <View>
-                  <Particle_Background />
-
       <div style={{display:'flex',flexWrap:'wrap',flexDirection:'row',padding:'40px'}}>
 
         <div style={{backgroundColor:'#3275a6',width:'400px',height:'200px',marginBottom:'30px',borderRadius:'10px'}}>
